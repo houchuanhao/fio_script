@@ -46,6 +46,8 @@ def get_len(strs):
     return n
 def get_cmd(s0,col_id):
     if(col_id==ncols):
+        s1=s0.replace(" ","__")
+        #s0=s0+"-output"
         print(s0)
         Note.writelines(s0+'\n')
         return
