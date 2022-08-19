@@ -74,8 +74,40 @@ def get_cmd(s0,col_id):
             s = s0 + "-"+row0+"="+sv+" ";
             get_cmd(s ,col_id+1)
     return
+
+def gen_workspace():
+    os.system("rm "+base+"workspace/ -rf")
+    os.system("mkdir workspace")
+    os.system("mkdir workspace/out")
+    os.system("cp "+base+"cmd.fio "+base+"workspace/cmd.fio")
+    os.system("cp "+base+"config.xlsx "+base+"workspace/config.xlsx")
+    script_file = open(base + 'cmd.fio', mode='r')
+    scripts = script_file.readlines()
+    i=1
+    for script in scripts:
+        os.system("mkdir "+base+"workspace/out/"+str(i))
+        r = open(base+"workspace/out/"+str(i)+'/r', mode='w')
+        r.writelines(script)
+        i= i + 1
+        r.close()
+    run_all = open(base +"workspace/run_all",mode='w')
+    run_all.write("cd out\n")
+    for j in range(1,i):
+        run_all.write("cd "+ str(j)+"\n"
+                                    "chmod 777 r\n"
+                                    "echo "+str(j)+"\n"
+                                    "cat r\n"
+                                    "./r\n"
+                                    "cd ..\n")
+    run_all.close()
+    os.system("chmod 777 "+base+"workspace/run_all")
+    return
 get_cmd("fio ",0)
 Note.close()
+gen_workspace()
+
+
+
 exit(0)
 x = sheet1.col_values(9)
 print(x)
