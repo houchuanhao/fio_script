@@ -82,6 +82,7 @@ def gen_workspace():
     os.system("mkdir workspace/out")
     os.system("cp "+base+"cmd.fio "+base+"workspace/cmd.fio")
     os.system("cp "+base+"config.xlsx "+base+"workspace/config.xlsx")
+    os.system("cp "+base+"utils/* "+base+"workspace" )
     script_file = open(base + 'cmd.fio', mode='r')
     scripts = script_file.readlines()
     i=1
