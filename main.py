@@ -108,7 +108,12 @@ get_cmd("fio ",0)
 Note.close()
 gen_workspace()
 
-
+# 数据总行数
+nrows = sheet1.nrows
+print('数据总行数：', nrows)
+# 数据总列数
+ncols = sheet1.ncols
+print('表格总列数：', ncols)
 
 exit(0)
 x = sheet1.col_values(9)
