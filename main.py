@@ -51,7 +51,8 @@ def get_cmd(s0,col_id):
         print(s0)
         Note.writelines(s0+'\n')
         return
-    row0 = sheet1.cell(0,col_id).value
+    row0 = str(sheet1.cell(0,col_id).value)
+    row0.replace('!','')
     row0=str(row0).replace(" ","")
     col_values=sheet1.col_values(col_id)
     if("#" in row0):
