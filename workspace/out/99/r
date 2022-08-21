@@ -1,1 +1,0 @@
-fio -filename=/dev/sdb -readwrite=randread -blocksize=4k -runtime=300 -ioengine=psync -iodepth=2 -direct=1 -numjobs=8 -thread -group_reporting -name=test -output-format=json -output=out 

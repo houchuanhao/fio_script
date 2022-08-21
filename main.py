@@ -93,6 +93,7 @@ def gen_workspace():
         i= i + 1
         r.close()
     run_all = open(base +"workspace/run_all",mode='w')
+    run_all.write("echo $(date '+%Y%m%d%H%M%S')>date\n")
     run_all.write("cd out\n")
     for j in range(1,i):
         run_all.write("cd "+ str(j)+"\n"
@@ -101,6 +102,7 @@ def gen_workspace():
                                     "cat r\n"
                                     "./r\n"
                                     "cd ..\n")
+    run_all.write("python3 colection.py")
     run_all.close()
     os.system("chmod 777 "+base+"workspace/run_all")
     return
