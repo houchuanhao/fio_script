@@ -6,38 +6,45 @@ import json
 model="test"
 base=""
 if model=="test":
-    base="./workspace/out/"
+    base="./workspace/"
 else:
-    base="./out/"
+    base="./"
 def load_json(i):
-    out=json.load(open(base+str(i)+"/out.json",'r',encoding="utf-8"))
+    out=json.load(open(base+"out/"+str(i)+"/out",'r',encoding="utf-8"))
     return out
-def colection(i):
+def get_len():
+    script_file = open(base + 'cmd.fio', mode='r')
+    scripts = script_file.readlines()
+    return len(scripts)
+sec_key=["filename","bs","runtime","ioengine","direct","rw","iodepth","numjobs","r_bw","r_iops","w_bw","w_iops"]
+def get_col_dic(i=1):
     json_obj=load_json(i)
     global_opt=json_obj['global options']
-    rw=global_opt['rw']
-    print(rw)
     jobs=json_obj['jobs'][0]
     dic={}
     dic["r_bw"]=jobs['read']['bw']
     dic["r_iops"]=jobs['read']['iops']
     dic["w_bw"]=jobs['write']['bw']
     dic["w_iops"]=jobs['write']['iops']
-    workbook = xlsxwriter.Workbook('D:/Ezra/fio_script/workspace/colection.xlsx')
-    worksheet = workbook.add_worksheet()
-    row=col=0
-    worksheet.write(0,0,"id")
     col_dic=dic.copy()
     col_dic.update(global_opt)
+    return col_dic
+def colection():
+    workbook = xlsxwriter.Workbook('workspace/colection.xlsx')
+    worksheet = workbook.add_worksheet()
+    worksheet.write(0, 0, "id")
+    key_dic=get_col_dic()
     i=1
-    for key in col_dic:
+    for key in key_dic:
         worksheet.write(0,i,key)
         i=i+1
-    for j in range(1,2):
+    length=get_len()
+    for j in range(1,length+1):
+        col_dic=get_col_dic(j)
         i=1
         for key in col_dic:
             worksheet.write(j,i,col_dic[key])
             i=i+1
     workbook.close()
 
-colection(1)
+colection()
