@@ -1,0 +1,12 @@
+sudo apt-get install  xfsprogs
+1. 查看一下系统分区的文件系统信息
+lsblk -f
+2. 把 /dev/sdb 格式化成 xfs
+mkfs -t xfs /dev/sdb
+3. 格式化之后再查看分区的文件系统信息
+
+$ lsblk -f
+
+4.将ssd写满
+sudo dd if=/dev/random of=/ssd/file1 bs=1G count=400 iflag=fullblock
+
