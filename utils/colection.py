@@ -4,9 +4,11 @@ import os
 import sys
 import json
 model="test"
+if(os.getcwd().find("utils")==-1):
+    model="running"
 base=""
 if model=="test":
-    base="./workspace/"
+    base="../workspace/"
 else:
     base="./"
 def load_json(i):
@@ -30,21 +32,21 @@ def get_col_dic(i=1):
     col_dic.update(global_opt)
     return col_dic
 def colection():
-    workbook = xlsxwriter.Workbook('workspace/colection.xlsx')
+    workbook = xlsxwriter.Workbook('../workspace/colection.xlsx')
     worksheet = workbook.add_worksheet()
     worksheet.write(0, 0, "id")
-    key_dic=get_col_dic()
     i=1
-    for key in key_dic:
+    for key in sec_key:
         worksheet.write(0,i,key)
         i=i+1
     length=get_len()
     for j in range(1,length+1):
         col_dic=get_col_dic(j)
         i=1
-        for key in col_dic:
+        for key in sec_key:
             worksheet.write(j,i,col_dic[key])
             i=i+1
+        worksheet.write(j, 0, j)
     workbook.close()
 
 colection()
