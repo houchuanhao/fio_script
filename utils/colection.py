@@ -54,6 +54,6 @@ colection()
 datefile = open("../workspace/date",mode='r')
 date=datefile.readlines()[0]
 date.replace("\n","")
-s="tar  -cvf  ../workspace"+date+".tar  ../workspace"
+s="tar  -cvf  ../workspace"+date[0:13]+".tar  ../workspace"
 print(s)
 os.system(s)

@@ -102,7 +102,8 @@ def gen_workspace():
                                     "cat r\n"
                                     "./r\n"
                                     "cd ..\n")
-    run_all.write("python3 colection.py")
+    run_all.write("cd ..\n")
+    run_all.write("python3 colection.py\n")
     run_all.close()
     os.system("chmod 777 "+base+"workspace/run_all")
     return
