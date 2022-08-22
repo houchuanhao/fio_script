@@ -99,6 +99,7 @@ def gen_workspace():
         run_all.write("cd "+ str(j)+"\n"
                                     "chmod 777 r\n"
                                     "echo "+str(j)+"\n"
+                                    "sleep 30s\n"
                                     "cat r\n"
                                     "./r\n"
                                     "cd ..\n")
