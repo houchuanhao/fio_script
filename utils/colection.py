@@ -49,11 +49,25 @@ def colection():
         worksheet.write(j, 0, j)
     workbook.close()
 
+def getparent():
+    par_str=os.getcwd()
+    par_str=par_str.split("/")
+    return par_str[-1]
+getparent()
 colection()
-
-datefile = open("../workspace/date",mode='r')
+datefile=0
+if model=="test":
+    datefile = open("../workspace/date",mode='r')
+else:
+    datefile = open("./date",mode='r')
 date=datefile.readlines()[0]
 date.replace("\n","")
-s="tar  -cvf  ../workspace"+date[0:13]+".tar  ../workspace"
-print(s)
-os.system(s)
+s=""
+if model=="test":
+    s="tar  -cvf  ../workspace"+date[0:13]+".tar  ../workspace"
+    os.system(s)
+else:
+    par=getparent()
+    s = "cp ../"+ par+" ../workspace"+date[0:13]+" -rf \n"\
+        "tar  -cvf  ../workspace" + date[0:13] + ".tar  ../workspace"+date[0:13]+"\n"
+    os.system(s)
