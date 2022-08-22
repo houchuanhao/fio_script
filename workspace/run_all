@@ -1,0 +1,39 @@
+echo $(date '+%Y%m%d%H%M%S')>date
+cd out
+cd 1
+chmod 777 r
+echo 1
+cat r
+./r
+cd ..
+cd 2
+chmod 777 r
+echo 2
+cat r
+./r
+cd ..
+cd 3
+chmod 777 r
+echo 3
+cat r
+./r
+cd ..
+cd 4
+chmod 777 r
+echo 4
+cat r
+./r
+cd ..
+cd 5
+chmod 777 r
+echo 5
+cat r
+./r
+cd ..
+cd 6
+chmod 777 r
+echo 6
+cat r
+./r
+cd ..
+python3 colection.py
